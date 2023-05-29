@@ -65,7 +65,8 @@ minetest.register_craftitem(mod_name .. "cheese", {
 minetest.register_craft({
   output = mod_name .. "cheese",
   type = "cooking",
-  recipe ="group:food_milk",
+  recipe ="animalia:bucket_milk",
+  replacements = {{"animalia:bucket_milk", "bucket"}},
   cooktime = 5
 
 })
