@@ -20,7 +20,7 @@ local pizzas = {
 for key, pizza in pairs(pizzas) do
     minetest.register_craftitem(pizza.name, {
         description = pizza.description,
-        on_use = minetest.item_eat(6),
+        on_use = minetest.item_eat(12),
         groups = { food = 1, pizza = 1 },
         image = pizza.image .. ".png"
     })
@@ -36,7 +36,7 @@ for key, pizza in pairs(pizzas) do
 
     minetest.register_craftitem(pizza.name .. "_slice", {
         description = pizza.description .. " Slice",
-        on_use = minetest.item_eat(1),
+        on_use = minetest.item_eat(2),
         groups = { food = 1, pizza=1},
         inventory_image = pizza.image .. "_slice.png"
     })
