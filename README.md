@@ -1,4 +1,7 @@
 # Crusty_Pizza
+
+![image](screenshot.png)
+
 A pizza mod for minetest.
 
 # Recommended mods
