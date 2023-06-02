@@ -3,7 +3,7 @@ local dough = mod_name .. "pizza_dough"
 local pizzas = {
     {
         description  = "Pepperoni Pizza",
-        name         = mod_name .. "pepperoni_pizza",
+        name         = "pepperoni_pizza",
         hunger       = 12,
         hunger_slice = 2,
         image        = "pepperoni_pizza",
@@ -11,7 +11,7 @@ local pizzas = {
     },
     {
         description  = "Cheese Pizza",
-        name         = mod_name .. "cheese_pizza",
+        name         = "cheese_pizza",
         hunger       = 12,
         hunger_slice = 2,
         image        = "cheese_pizza",
@@ -19,19 +19,20 @@ local pizzas = {
     },
     {
         description  = "Vegetarian Pizza",
-        name         = mod_name .. "veg_pizza",
+        name         = "veg_pizza",
         hunger       = 12,
         hunger_slice = 2,
         image        = "veg_pizza",
-        recipe       = { "group:food_cheese", "group:food_mushroom", "group:food_pepper"}
+        recipe       = { "group:food_cheese", "group:food_mushroom", "group:food_pepper" }
     }
 }
 
 
 for key, pizza in pairs(pizzas) do
     table.insert(pizza.recipe, dough)
+    local name = mod_name .. pizza.name
     -- Pizza Slice
-    minetest.register_craftitem(pizza.name .. "_slice", {
+    minetest.register_craftitem(name .. "_slice", {
         description = pizza.description .. " Slice",
         on_use = minetest.item_eat(pizza.hunger_slice),
         groups = { food = 1, food_pizza_slice = 1 },
@@ -40,31 +41,49 @@ for key, pizza in pairs(pizzas) do
 
     minetest.register_craft({
         type = "shapeless",
-        output = pizza.name .. "_slice 6",
-        recipe = { pizza.name },
+        output = name .. "_slice 6",
+        recipe = { name },
 
     })
 
     minetest.register_craft(
         {
             type = "shapeless",
-            output = pizza.name,
-            recipe = { pizza.name .. "_slice", pizza.name .. "_slice", pizza.name .. "_slice",
-                pizza.name .. "_slice", pizza.name .. "_slice", pizza.name .. "_slice" }
+            output = name,
+            recipe = { name .. "_slice", name .. "_slice", name .. "_slice",
+                name .. "_slice", name .. "_slice", name .. "_slice" }
         })
 
     -- Full Pizza
 
-    minetest.register_craftitem(pizza.name, {
+
+
+    minetest.register_node(name, {
         description = pizza.description,
-        on_use = minetest.item_eat(pizza.hunger_slice),
-        groups = { food = 1, food_pizza = 1 },
-        image = pizza.image .. ".png"
+        drawtype = "mesh",
+        on_use = minetest.item_eat(pizza.hunger),
+        groups = { dig_immediate=2.5 },
+        mesh = 'pizza.obj',
+        tiles = { pizza.image .. '.png' },
+        inventory_image = pizza.image .. '.png',
+        node_box = {
+            type = "fixed",
+            fixed = {
+                { -0.5000, -0.5000, -0.5000, 0.5000, -0.44, 0.5000 }
+            }
+        },
+        selection_box = {
+            type = "fixed",
+            fixed = {
+                { -0.5000, -0.5000, -0.5000, 0.5000, -0.44, 0.5000 }
+            }
+        }
     })
 
 
+
     minetest.register_craft({
-        output = pizza.name,
+        output = name,
         recipe = pizza.recipe,
         type = "shapeless"
 
