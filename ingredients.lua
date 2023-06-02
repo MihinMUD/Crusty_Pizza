@@ -10,7 +10,7 @@ minetest.register_craftitem(mod_name .. "raw_pizza_dough", {
 minetest.register_craft({
   output = mod_name .. "raw_pizza_dough",
   recipe = {
-    "farming:flour", "bucket:bucket_water", mod_name .. "dough_roller"
+    "group:food_flour", "bucket:bucket_water", mod_name .. "dough_roller"
   },
   type = "shapeless",
   replacements = {
@@ -48,7 +48,7 @@ minetest.register_craftitem(mod_name .. "pepperoni", {
 minetest.register_craft({
   output = mod_name .. "pepperoni",
   type = "shapeless",
-  recipe ={"group:meat", "farming:chili_pepper"},
+  recipe ={"group:meat", "group:food_chili_pepper"},
   cooktime = 15.0
 
 })
@@ -65,8 +65,8 @@ minetest.register_craftitem(mod_name .. "cheese", {
 minetest.register_craft({
   output = mod_name .. "cheese",
   type = "cooking",
-  recipe ="animalia:bucket_milk",
-  replacements = {{"animalia:bucket_milk", "bucket"}},
+  recipe ="group:food_milk",
+  replacements = {{"group:food_milk", "bucket"}},
   cooktime = 5
 
 })
